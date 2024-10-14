@@ -12,3 +12,10 @@ output:
 ## Project thoughts
 
 I am interested in exploring data related to the most environmentally polluted areas in the U.S. over the past five years, or data on refugees who have come to the U.S. over the past five years.
+
+## Project proposal
+
+For my final project, I will be using the U.S. Department of State's Labor Market Impact of Refugees data to examine refugees admitted to the U.S. over the past five years. 
+My research question is: How do the settlement assistance programs in local communities affect the employment rates of refugees within their first year in the U.S. My hypothesis: Refugees in communities with more assistance programs will have higher employment rates compared to those in communities with fewer programs. My hypothesis is based on the idea of social integration theory, which argues that higher levels of social integration could eliminate segregation, making individuals more successful in adapting.
+The explanatory variable is community support for refugees, and it could be measured by the number, type, and revenue of settlement support programs in different communities. The outcome variable is the employment rate of refugees, and it could be measured by the employment statistics of each community.
+If my hypothesis is correct, there should be a positive correlation between the number of settlement assistance programs/revenue spent on settlement assistance programs and refugee employment rates. If my hypothesis is wrong, I might find a negative correlation or no pattern between them. Therefore, there are other factors that determine the employment rates more.
