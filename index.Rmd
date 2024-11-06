@@ -26,6 +26,8 @@ unemployment <- read.csv("~/Downloads/unemployment.csv")
 ```
 
 ```{r}
+merged_data <- merge(incomeinequality, unemployment, by = "DATE")
+
 ggplot(merged_data, aes(x = WIUR, y = X2020RATIO055025)) +
   geom_point(color = "blue") +
   geom_smooth(method = "lm", se = FALSE, color = "red") +
