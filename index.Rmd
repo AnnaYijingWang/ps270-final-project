@@ -7,18 +7,13 @@ output:
     self_contained: false
 ---
 
-
-
 ## Project thoughts
 
 I am interested in exploring data related to the most environmentally polluted areas in the U.S. over the past five years, or data on refugees who have come to the U.S. over the past five years.
 
 ## Project proposal
 
-For my final project, I will use data from the Federal Reserve Bank of St Louis (FRED) on the unemployment rate and degree of income inequality in Wisconsin to test whether there is a correlation between the two. 
-My research question is whether the unemployment rate affects income inequality in Wisconsin. My hypothesis is that the higher the unemployment rate, the higher the income inequality. 
-My hypothesis is based on social stratification theory, which argues that unemployment is likely to be concentrated among lower-income groups, widening the income gap between the economically secure and the insecure. 
-The explanatory variable is the unemployment rate and the outcome variable is the rate of income inequality. If my hypothesis is correct, then there should be a positive correlation between unemployment and income inequality. If my hypothesis is wrong, I may find a negative correlation or no pattern between them. So, there are other factors that contribute more to income inequality.
+For my final project, I will use data from the Federal Reserve Bank of St Louis (FRED) on the unemployment rate and degree of income inequality in Wisconsin to test whether there is a correlation between the two. My research question is whether the unemployment rate affects income inequality in Wisconsin. My hypothesis is that the higher the unemployment rate, the higher the income inequality. My hypothesis is based on social stratification theory, which argues that unemployment is likely to be concentrated among lower-income groups, widening the income gap between the economically secure and the insecure. The explanatory variable is the unemployment rate and the outcome variable is the rate of income inequality. If my hypothesis is correct, then there should be a positive correlation between unemployment and income inequality. If my hypothesis is wrong, I may find a negative correlation or no pattern between them. So, there are other factors that contribute more to income inequality.
 
 ```{r}
 library(dplyr)
@@ -41,8 +36,3 @@ ggplot(merged_data, aes(x = WIUR, y = X2020RATIO055025)) +
   ) +
   theme_minimal()
 ```
-
-
-
-
-
