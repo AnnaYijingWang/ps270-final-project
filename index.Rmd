@@ -34,7 +34,21 @@ ggplot(merged_data, aes(x = WIUR, y = X2020RATIO055025)) +
   labs(
     title = "Relationship between Unemployment Rate and Income Inequality",
     x = "Unemployment Rate",
-    y = "Income Inequality Ratio"
-  ) +
-  theme_minimal()
+    y = "Income Inequality Ratio",
+    caption = "Date Source: Federal Reserve Bank of St Louis (FRED)")
 ```
+```{r}
+library(broom)
+library(knitr)
+```
+
+```{r}
+fit <- lm(X2020RATIO055025 ~ WIUR, data = merged_data)
+fit <- coef(fit)
+knitr::kable(fit, caption = "Linear Model Coefficients between Unemployment and Income Inequaility")
+```
+
+## Analysis
+
+According to my visualization, the slope of the trend appears to be slightly negative, suggesting that higher unemployment leads to lower income inequality, which is contrary to my hypothesis. 
+The coefficients of the linear model have an intercept of around 13.23 and a slope of around -0.00118. This means that for every percentage point increase in the unemployment rate, the income inequality ratio decreases by 0.118%. However, as the magnitude of the coefficient is very small, we could consider that there is no strong relationship between unemployment and income inequality, which is also contrary to my hypothesis. This suggests that the unemployment rate may not be a significant driver of income inequality in Wisconsin, there may be other factors that more obviously affect income inequality.
