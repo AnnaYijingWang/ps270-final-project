@@ -7,13 +7,12 @@ output:
     self_contained: false
 ---
 
-## Project thoughts
 
-I am interested in exploring data related to the most environmentally polluted areas in the U.S. over the past five years, or data on refugees who have come to the U.S. over the past five years.
+## Introduction
 
-## Project proposal
+In my final project, I investigated whether the unemployment rate affects income inequality in Wisconsin. My research question is: Does a higher unemployment rate worsen income inequality? My hypothesis is that the higher the unemployment rate, the more severe income inequality becomes. This hypothesis is based on social stratification theory, which suggests that unemployment tends to concentrate among lower-income groups and hits them the hardest. This widens the income gap between those who are economically secure and those who are not. I believe this question is important because it helps us understand the major factors causing income inequality and helps develop policies aimed at reducing inequality and supporting unemployed individuals, preventing society from falling into a situation where the rich become richer, and the poor become poorer.
 
-For my final project, I will use data from the Federal Reserve Bank of St Louis (FRED) on the unemployment rate and degree of income inequality in Wisconsin to test whether there is a correlation between the two. My research question is whether the unemployment rate affects income inequality in Wisconsin. My hypothesis is that the higher the unemployment rate, the higher the income inequality. My hypothesis is based on social stratification theory, which argues that unemployment is likely to be concentrated among lower-income groups, widening the income gap between the economically secure and the insecure. The explanatory variable is the unemployment rate and the outcome variable is the rate of income inequality. If my hypothesis is correct, then there should be a positive correlation between unemployment and income inequality. If my hypothesis is wrong, I may find a negative correlation or no pattern between them. So, there are other factors that contribute more to income inequality.
+If my hypothesis is correct, the relationship between the unemployment rate and the income inequality ratio will show a positive correlation. That is, when unemployment rises, the income inequality ratio also rises. If my hypothesis is wrong, I may find a negative correlation or no clear pattern at all, which would indicate that other factors have a greater impact on income inequality.
 
 ```{r}
 library(dplyr)
@@ -25,10 +24,30 @@ incomeinequality <- read.csv("~/Downloads/incomeinequality.csv")
 unemployment <- read.csv("~/Downloads/unemployment.csv")
 ```
 
+## Data Analysis
 ```{r}
+incomeinequality$DATE <- as.Date(incomeinequality$DATE, format = "%d/%m/%Y")
+unemployment$DATE <- as.Date(unemployment$DATE, format = "%Y-%m-%d")
+
 merged_data <- merge(incomeinequality, unemployment, by = "DATE")
 
-ggplot(merged_data, aes(x = WIUR, y = X2020RATIO055025)) +
+ggplot(merged_data, aes(x = DATE, y = RATIO)) +
+  geom_line() +
+  labs(title= "Trend of Income Inequality in Wisconsin",
+       x= "Year",
+       y= "Income Inequality Ratio",
+       caption= "Data source: Federal Reserve Bank of St. Louis (FRED)")
+```
+For this project, I used publicly available data from the Federal Reserve Bank of St. Louis (FRED). FRED is a branch of the U.S. Federal Reserve, which makes it a very reliable data source. The data I used spans from 2010 to 2023, focusing on Wisconsin. The two variables I analyzed are:
+
+1. Unemployment Rate (WIUR): This is my independent variable. It measures the percentage of the labor force that is unemployed. A higher unemployment rate means more people are unemployed.
+2. Income Inequality Ratio (RATIO): This is my dependent variable. It measures the degree of uneven income distribution among the population. A higher ratio indicates that income is more unevenly distributed.
+
+To better understand the dependent variable income inequality ratio, I created a line graph. This graph shows that income inequality in Wisconsin has fluctuated greatly over time. Notably, after 2020, the income inequality ratio rose significantly and steadily.
+
+## Results Analysis
+```{r}
+ggplot(merged_data, aes(x = WIUR, y = RATIO)) +
   geom_point(color = "blue") +
   geom_smooth(method = "lm", se = FALSE, color = "red") +
   labs(
@@ -37,18 +56,24 @@ ggplot(merged_data, aes(x = WIUR, y = X2020RATIO055025)) +
     y = "Income Inequality Ratio",
     caption = "Date Source: Federal Reserve Bank of St Louis (FRED)")
 ```
+
 ```{r}
 library(broom)
 library(knitr)
 ```
 
 ```{r}
-fit <- lm(X2020RATIO055025 ~ WIUR, data = merged_data)
+fit <- lm(RATIO ~ WIUR, data = merged_data)
 fit <- coef(fit)
 knitr::kable(fit, caption = "Linear Model Coefficients between Unemployment and Income Inequaility")
 ```
+To test the relationship between unemployment and income inequality, I created a scatterplot and performed a linear regression. The scatterplot shows the unemployment rate on the x-axis and the income inequality ratio on the y-axis. From the scatterplot, I observed a slightly downward trend, meaning that higher unemployment rates appear to be associated with slightly lower income inequality. This finding contradicts my initial hypothesis.
 
-## Analysis
+Through the regression model, I calculated that the coefficient for the unemployment rate is approximately -0.0307. This means that for every 1 percentage point increase in the unemployment rate, the income inequality ratio decreases by about 0.03 points. Although this effect is small, it is statistically significant.
 
-According to my visualization, the slope of the trend appears to be slightly negative, suggesting that higher unemployment leads to lower income inequality, which is contrary to my hypothesis. 
-The coefficients of the linear model have an intercept of around 13.23 and a slope of around -0.00118. This means that for every percentage point increase in the unemployment rate, the income inequality ratio decreases by 0.118%. However, as the magnitude of the coefficient is very small, we could consider that there is no strong relationship between unemployment and income inequality, which is also contrary to my hypothesis. This suggests that the unemployment rate may not be a significant driver of income inequality in Wisconsin, there may be other factors that more obviously affect income inequality.
+## Conclusion
+This result of my project surprised me, because I had expected that higher unemployment would increase income inequality. However, the negative coefficient suggests that when more people are unemployed, income inequality may shrink slightly. This relationship is statistically significant, but I believe this analysis does not prove causality because other factors might have a greater influence on income inequality. For example, during periods of high unemployment, the government may issue unemployment benefits, which could reduce income inequality.
+
+This is also one of the limitations of my research: I did not account for other possible factors, such as education levels or government intervention policies, that may affect income inequality. Additionally, since my data focuses only on Wisconsin, the sample size is limited and cannot represent the entire country. Therefore, if I had more time, I would improve this research by including additional variables to control for these other factors. I would also examine data from other states and conduct comparisons to provide a broader perspective.
+
+

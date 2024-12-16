@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.28/header-attrs.js","index_files/header-attrs-2.29/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.28/header-attrs.js","index_files/header-attrs-2.29/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1543,10 +1543,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<h2 id="project-thoughts">Project thoughts</h2>
-<p>I am interested in exploring data related to the most environmentally polluted areas in the U.S. over the past five years, or data on refugees who have come to the U.S. over the past five years.</p>
-<h2 id="project-proposal">Project proposal</h2>
-<p>For my final project, I will use data from the Federal Reserve Bank of St Louis (FRED) on the unemployment rate and degree of income inequality in Wisconsin to test whether there is a correlation between the two. My research question is whether the unemployment rate affects income inequality in Wisconsin. My hypothesis is that the higher the unemployment rate, the higher the income inequality. My hypothesis is based on social stratification theory, which argues that unemployment is likely to be concentrated among lower-income groups, widening the income gap between the economically secure and the insecure. The explanatory variable is the unemployment rate and the outcome variable is the rate of income inequality. If my hypothesis is correct, then there should be a positive correlation between unemployment and income inequality. If my hypothesis is wrong, I may find a negative correlation or no pattern between them. So, there are other factors that contribute more to income inequality.</p>
+<h2 id="introduction">Introduction</h2>
+<p>In my final project, I investigated whether the unemployment rate affects income inequality in Wisconsin. My research question is: Does a higher unemployment rate worsen income inequality? My hypothesis is that the higher the unemployment rate, the more severe income inequality becomes. This hypothesis is based on social stratification theory, which suggests that unemployment tends to concentrate among lower-income groups and hits them the hardest. This widens the income gap between those who are economically secure and those who are not. I believe this question is important because it helps us understand the major factors causing income inequality and helps develop policies aimed at reducing inequality and supporting unemployed individuals, preventing society from falling into a situation where the rich become richer, and the poor become poorer.</p>
+<p>If my hypothesis is correct, the relationship between the unemployment rate and the income inequality ratio will show a positive correlation. That is, when unemployment rises, the income inequality ratio also rises. If my hypothesis is wrong, I may find a negative correlation or no clear pattern at all, which would indicate that other factors have a greater impact on income inequality.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span>
@@ -1559,11 +1558,33 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span><span class='va'>unemployment</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='st'>"~/Downloads/unemployment.csv"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
+<h2 id="data-analysis">Data Analysis</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>merged_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span><span class='op'>(</span><span class='va'>incomeinequality</span>, <span class='va'>unemployment</span>, by <span class='op'>=</span> <span class='st'>"DATE"</span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>incomeinequality</span><span class='op'>$</span><span class='va'>DATE</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span><span class='op'>(</span><span class='va'>incomeinequality</span><span class='op'>$</span><span class='va'>DATE</span>, format <span class='op'>=</span> <span class='st'>"%d/%m/%Y"</span><span class='op'>)</span></span>
+<span><span class='va'>unemployment</span><span class='op'>$</span><span class='va'>DATE</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span><span class='op'>(</span><span class='va'>unemployment</span><span class='op'>$</span><span class='va'>DATE</span>, format <span class='op'>=</span> <span class='st'>"%Y-%m-%d"</span><span class='op'>)</span></span>
 <span></span>
-<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>merged_data</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>WIUR</span>, y <span class='op'>=</span> <span class='va'>X2020RATIO055025</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span><span class='va'>merged_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span><span class='op'>(</span><span class='va'>incomeinequality</span>, <span class='va'>unemployment</span>, by <span class='op'>=</span> <span class='st'>"DATE"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>merged_data</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>DATE</span>, y <span class='op'>=</span> <span class='va'>RATIO</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title<span class='op'>=</span> <span class='st'>"Trend of Income Inequality in Wisconsin"</span>,</span>
+<span>       x<span class='op'>=</span> <span class='st'>"Year"</span>,</span>
+<span>       y<span class='op'>=</span> <span class='st'>"Income Inequality Ratio"</span>,</span>
+<span>       caption<span class='op'>=</span> <span class='st'>"Data source: Federal Reserve Bank of St. Louis (FRED)"</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+</div>
+<p>For this project, I used publicly available data from the Federal Reserve Bank of St. Louis (FRED). FRED is a branch of the U.S. Federal Reserve, which makes it a very reliable data source. The data I used spans from 2010 to 2023, focusing on Wisconsin. The two variables I analyzed are:</p>
+<ol type="1">
+<li>Unemployment Rate (WIUR): This is my independent variable. It measures the percentage of the labor force that is unemployed. A higher unemployment rate means more people are unemployed.</li>
+<li>Income Inequality Ratio (RATIO): This is my dependent variable. It measures the degree of uneven income distribution among the population. A higher ratio indicates that income is more unevenly distributed.</li>
+</ol>
+<p>To better understand the dependent variable income inequality ratio, I created a line graph. This graph shows that income inequality in Wisconsin has fluctuated greatly over time. Notably, after 2020, the income inequality ratio rose significantly and steadily.</p>
+<h2 id="results-analysis">Results Analysis</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>merged_data</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>WIUR</span>, y <span class='op'>=</span> <span class='va'>RATIO</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"blue"</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span>, color <span class='op'>=</span> <span class='st'>"red"</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
@@ -1572,7 +1593,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>    y <span class='op'>=</span> <span class='st'>"Income Inequality Ratio"</span>,</span>
 <span>    caption <span class='op'>=</span> <span class='st'>"Date Source: Federal Reserve Bank of St Louis (FRED)"</span><span class='op'>)</span></span></code></pre>
 </div>
-<p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
+<p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -1582,12 +1603,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>X2020RATIO055025</span> <span class='op'>~</span> <span class='va'>WIUR</span>, data <span class='op'>=</span> <span class='va'>merged_data</span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>RATIO</span> <span class='op'>~</span> <span class='va'>WIUR</span>, data <span class='op'>=</span> <span class='va'>merged_data</span><span class='op'>)</span></span>
 <span><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span></span>
 <span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>fit</span>, caption <span class='op'>=</span> <span class='st'>"Linear Model Coefficients between Unemployment and Income Inequaility"</span><span class='op'>)</span></span></code></pre>
 </div>
 <table>
-<caption><span id="tab:unnamed-chunk-5">Table 1: </span>Linear Model Coefficients between Unemployment and Income Inequaility</caption>
+<caption><span id="tab:unnamed-chunk-6">Table 1: </span>Linear Model Coefficients between Unemployment and Income Inequaility</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -1597,18 +1618,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">13.2344245</td>
+<td style="text-align: right;">13.3632081</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">WIUR</td>
-<td style="text-align: right;">-0.0118127</td>
+<td style="text-align: right;">-0.0307031</td>
 </tr>
 </tbody>
 </table>
 </div>
-<h2 id="analysis">Analysis</h2>
-<p>According to my visualization, the slope of the trend appears to be slightly negative, suggesting that higher unemployment leads to lower income inequality, which is contrary to my hypothesis.
-The coefficients of the linear model have an intercept of around 13.23 and a slope of around -0.00118. This means that for every percentage point increase in the unemployment rate, the income inequality ratio decreases by 0.118%. However, as the magnitude of the coefficient is very small, we could consider that there is no strong relationship between unemployment and income inequality, which is also contrary to my hypothesis. This suggests that the unemployment rate may not be a significant driver of income inequality in Wisconsin, there may be other factors that more obviously affect income inequality.</p>
+<p>To test the relationship between unemployment and income inequality, I created a scatterplot and performed a linear regression. The scatterplot shows the unemployment rate on the x-axis and the income inequality ratio on the y-axis. From the scatterplot, I observed a slightly downward trend, meaning that higher unemployment rates appear to be associated with slightly lower income inequality. This finding contradicts my initial hypothesis.</p>
+<p>Through the regression model, I calculated that the coefficient for the unemployment rate is approximately -0.0307. This means that for every 1 percentage point increase in the unemployment rate, the income inequality ratio decreases by about 0.03 points. Although this effect is small, it is statistically significant.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>This result of my project surprised me, because I had expected that higher unemployment would increase income inequality. However, the negative coefficient suggests that when more people are unemployed, income inequality may shrink slightly. This relationship is statistically significant, but I believe this analysis does not prove causality because other factors might have a greater influence on income inequality. For example, during periods of high unemployment, the government may issue unemployment benefits, which could reduce income inequality.</p>
+<p>This is also one of the limitations of my research: I did not account for other possible factors, such as education levels or government intervention policies, that may affect income inequality. Additionally, since my data focuses only on Wisconsin, the sample size is limited and cannot represent the entire country. Therefore, if I had more time, I would improve this research by including additional variables to control for these other factors. I would also examine data from other states and conduct comparisons to provide a broader perspective.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
